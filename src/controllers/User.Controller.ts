@@ -7,7 +7,7 @@ import { asynHandler } from "../Utils/asynHandler";
 export const register = asynHandler(async (req: Request<{},{},IUser>, res: Response, next: NextFunction) => {
     const { name, email, password, confirmPassword } = req.body;
     
-    const user = await UserModel.create(email, password, name, confirmPassword);
+    const user = await UserModel.create({email, password, name, confirmPassword});
         if(!user){
             next(new AppError({
                 message: "Account Not Created",
