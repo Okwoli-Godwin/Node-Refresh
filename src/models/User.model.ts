@@ -54,7 +54,7 @@ userSchema.methods.comparePassword = async function (userPassword:string) {
    
     const isMatch = await bcrypt.compare(userPassword, this.password)
     
-    return isMatch
+    return isMatch;
 }
 
 const UserModel = model<IUserDocument>("User", userSchema);

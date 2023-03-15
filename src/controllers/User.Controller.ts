@@ -25,11 +25,12 @@ export const login = asynHandler(async (req:Request,res:Response,next:NextFuncti
 
     const user = await UserModel.findOne({ email })
 
+    if (!user) next(new AppError({
+        message: "Account does not exist",
+        httpCode: HttpCode.NOTFOUNd,
+    }));
+  await user?.comparePassword(password)
+
     
-    if (!email) next(
-        new AppError({
-            message: "Please Input the right Email",
-            httpCode: HttpCode.BAD_REQUEST,
-        })
-    );
+ 
 })
