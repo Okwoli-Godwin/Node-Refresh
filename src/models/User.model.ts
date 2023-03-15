@@ -26,6 +26,7 @@ const userSchema: Schema<IUser> = new Schema({
         required:[true,"Please Enter the correct Password"]
     },
     role: {
+        type:String,
         enum: ["user", "admin", "manager"],
         message:"You must either be a user,admin or a manager",
         default:"user"
