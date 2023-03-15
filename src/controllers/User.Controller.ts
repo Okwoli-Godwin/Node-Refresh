@@ -32,7 +32,7 @@ export const login = asynHandler(async (req:Request,res:Response,next:NextFuncti
   await user?.comparePassword(password)
 
     return res.status(200).json({
-        message: "Successfully Login ",
+        message: "Successfully Login",
         data:user
     })
  
