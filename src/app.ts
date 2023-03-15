@@ -6,7 +6,7 @@ import morgan from "morgan"
  const appConfig = (app: Application) => {
     app.use(express.json()).use(cors()).use(morgan("dev"))
 
-    .all("/", (req: Request, res: Response, next: NextFunction) => {
+    .all("*", (req: Request, res: Response, next: NextFunction) => {
         next(
             
         )

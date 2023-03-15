@@ -1,8 +1,12 @@
-import express from "express"
+import express, { Application } from "express"
+import appConfig from "./app"
 import enviromentvariable from "./Config/enviromentvariable"
 
-const app = express()
+const app:Application = express()
 
-app.listen(enviromentvariable.PORT, () => {
-    console.log("server is riunning fine")
+appConfig(app)
+
+
+app.listen(enviromentvariable.port , () => {
+    console.log("server is running fine")
 })
