@@ -17,8 +17,8 @@ export enum HttpCode {
 
 interface ErrorArgs {
     name?: string,
-    isOPerational?: boolean
-    message: string
+    isOperational?: boolean,
+    message: string,
     httpCode: HttpCode
 }
 
@@ -26,18 +26,18 @@ export class AppError extends Error {
     public readonly name: string
     public readonly isOperational: boolean = true
     public readonly httpCode: HttpCode
-    constructor(args: ErrorArgs){
-        super(args.message)
+   constructor(args: ErrorArgs) {
+    super(args.message)
 
-        Object.setPrototypeOf(this, new.target.prototype)
+    Object.setPrototypeOf(this, new.target.prototype)
 
-        this.httpCode = args.httpCode
-        this.name = args.name || "Error"
+    this.httpCode = args.httpCode
+    this.name = args.name || "Error"
 
-        if(args.isOPerational !== undefined){
-            this.isOperational = args.isOPerational
-        }
-
-        Error.captureStackTrace(this)
+    if(args.isOperational !== undefined){
+        this.isOperational = args.isOperational
     }
+
+    Error.captureStackTrace(this)
+   }
 }
