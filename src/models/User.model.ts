@@ -1,9 +1,10 @@
 import { Schema, model } from "mongoose";
-import { IUser } from "../AllInterfaces/User.Interface";
+import { IUserDocument } from "../AllInterfaces/User.Interface";
 import isEmail from "validator/lib/isEmail"
 import bcrypt from "bcrypt"
 
-const userSchema: Schema<IUser> = new Schema({
+
+const userSchema: Schema<IUserDocument> = new Schema({
     name: {
         type: String,
         required: [true,"Please Enter Your Name"],        
@@ -44,9 +45,9 @@ userSchema.pre("save",async function (next) {
     user.password = await bcrypt.hash(user.password, salt)
     user.confirmPassword = user.password
 
-    next()
+    next();
 })
 
-const UserModel = model<IUser>("User", userSchema);
+const UserModel = model<IUserDocument>("User", userSchema);
 
 export default UserModel

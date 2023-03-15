@@ -19,3 +19,17 @@ export const register = asynHandler(async (req: Request<{},{},IUser>, res: Respo
         data:user,
     })
 })
+
+export const login = asynHandler(async (req:Request,res:Response,next:NextFunction) => {
+    const { email, password } = req.body;
+
+    const user = await UserModel.findOne({ email })
+
+    
+    if (!email) next(
+        new AppError({
+            message: "Please Input the right Email",
+            httpCode: HttpCode.BAD_REQUEST,
+        })
+    );
+})
