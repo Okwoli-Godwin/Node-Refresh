@@ -36,6 +36,7 @@ const userSchema: Schema<IUserDocument> = new Schema({
     timestamps:true
 })
 
+//MiddleWare for hashing passwords
 userSchema.pre("save",async function (next) {
     let user = this
     if (!this.isModified("password")) next()
@@ -47,6 +48,14 @@ userSchema.pre("save",async function (next) {
 
     next();
 })
+
+//Methods to compare password
+userSchema.methods.comparePassword = async function (userPassword:string) {
+   
+    const isMatch = await bcrypt.compare(userPassword, this.password)
+    
+    return isMatch
+}
 
 const UserModel = model<IUserDocument>("User", userSchema);
 
